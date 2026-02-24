@@ -1,10 +1,10 @@
-![Fraud Detection Banner](https://img.shields.io/badge/PR--AUC-0.9307-brightgreen?style=for-the-badge)
+![Fraud Detection Banner](https://img.shields.io/badge/PR--AUC-0.9284-brightgreen?style=for-the-badge)
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python)
 ![CatBoost](https://img.shields.io/badge/CatBoost-Latest-yellow?style=for-the-badge)
 ![Feature Importance](images/feature_importance.png)
 ![PR Curve](images/pr_curve.png)
 ![Cost Threshold](images/cost_threshold.png)
-# Credit Card Fraud Detection — 0.93 PR-AUC
+# Credit Card Fraud Detection — 0.92 PR-AUC
 
 > Detecting financial fraud in a dataset with **0.6% fraud rate** using CatBoost with
 > advanced feature engineering and cost-sensitive optimization.
@@ -13,11 +13,11 @@
 
 | Metric | Value |
 |--------|-------|
-| **Test PR-AUC** | **0.9307** |
+| **Test PR-AUC** | **0.9284** |
 | Test ROC-AUC | 0.9986 |
 | Fraud Recall | 0.90 |
 | Precision | 0.77 |
-| Val→Test Gap | 0.025 |
+| Val→Test Gap | 0.028 |
 
 > Evaluated on held-out `fraudTest.csv` — never seen during training or tuning.
 
@@ -42,7 +42,7 @@ the minority class, making it the only honest metric here.
 XGBoost with Leave-One-Out encoding achieved **0.67 test PR-AUC** with a
 **0.11 val→test gap**. Switching to CatBoost's native ordered target statistics:
 - Eliminated encoding drift between train and test periods
-- Reduced val→test gap from **0.11 → 0.025**
+- Reduced val→test gap from **0.11 → 0.028**
 - Improved test PR-AUC from **0.67 → 0.93**
 
 ### Why Time-Based Split
@@ -123,9 +123,9 @@ This project finds the optimal threshold by minimizing business cost:
 Total Cost = (False Positives × 1) + (False Negatives × 6)
 ```
 
-**Result:** Threshold of 0.793 achieves:
-- Recall: **0.90** — catching 90% of fraud
-- Precision: **0.77** — 77% of flagged transactions are genuine fraud
+**Result:** Threshold of 0.862 achieves:
+- Recall: **0.89** — catching 89% of fraud
+- Precision: **0.80** — 80% of flagged transactions are genuine fraud
 
 ---
 
@@ -137,8 +137,8 @@ Simulated credit card transactions from the
 
 | Split | Rows | Fraud Rate |
 |-------|------|------------|
-| fraudTrain.csv | ~1M | 0.6% |
-| fraudTest.csv | ~555K | 0.6% |
+| fraudTrain.csv | ~1.2M | ~0.6% |
+| fraudTest.csv | ~555K | ~0.4% |
 
 > Dataset is not included in this repository.
 > Download from Kaggle using the instructions below.
