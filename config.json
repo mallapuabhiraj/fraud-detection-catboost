@@ -1,0 +1,24 @@
+{
+  "cat_cols": [
+    "job",
+    "age_group",
+    "category",
+    "state"
+  ],
+  "best_params": {
+    "learning_rate": 0.037478,
+    "depth": 10,
+    "l2_leaf_reg": 7.976,
+    "scale_pos_weight": 243.95,
+    "bagging_temperature": 0.895,
+    "random_strength": 1.995,
+    "border_count": 240,
+    "iterations": 600
+  },
+  "results": {
+    "val_prauc": 0.9555,
+    "test_prauc": 0.9307,
+    "sparkov_prauc": 0.7309,
+    "val_test_gap": 0.025
+  }
+}
