@@ -143,7 +143,7 @@ Simulated credit card transactions from the
 
 ### 1. Clone repository
 ```bash
-git clone https://github.com/yourusername/fraud-detection-catboost
+git clone https://github.com/mallapuabhiraj/fraud-detection-catboost
 cd fraud-detection-catboost
 ```
 
