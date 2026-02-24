@@ -1,7 +1,9 @@
 ![Fraud Detection Banner](https://img.shields.io/badge/PR--AUC-0.9307-brightgreen?style=for-the-badge)
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python)
 ![CatBoost](https://img.shields.io/badge/CatBoost-Latest-yellow?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-red?style=for-the-badge)
+![Feature Importance](images/feature_importance.png)
+![PR Curve](images/pr_curve.png)
+![Cost Threshold](images/cost_threshold.png)
 # Credit Card Fraud Detection — 0.93 PR-AUC
 
 > Detecting financial fraud in a dataset with **0.6% fraud rate** using CatBoost with
