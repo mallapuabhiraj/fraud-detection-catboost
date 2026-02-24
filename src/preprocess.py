@@ -5,18 +5,15 @@ import pandas as pd
 
 
 class Preprocess(BaseEstimator, TransformerMixin):
-
     @staticmethod
     def haversine_distance(lat1, lon1, lat2, lon2):
         R = 6371.0
-        # Use np.radians instead of math.radians for array support
         lat1_rad, lon1_rad = np.radians(lat1), np.radians(lon1)
         lat2_rad, lon2_rad = np.radians(lat2), np.radians(lon2)
         dlon = lon2_rad - lon1_rad
         dlat = lat2_rad - lat1_rad
         a = np.sin(dlat / 2)**2 + np.cos(lat1_rad) * np.cos(lat2_rad) * np.sin(dlon / 2)**2
         c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
-        # Use np.round instead of round for array support
         return np.round(R * c)
 
     def preprocess(self, df):
@@ -120,7 +117,7 @@ class Preprocess(BaseEstimator, TransformerMixin):
         )
         df['amt_zscore_category'] = (df['amt'] - df['category_amt_mean']) / (df['category_amt_std'] + 0.01)
 
-        # Dormant card reactivation — silent card suddenly active with high amount
+        # Dormant card reactivation
         df['is_dormant_reactivation'] = (
             (df['time_since_last_min'] > 10080) &  # >7 days gap
             (df['amt'] > df['amt_mean_card'])
@@ -132,8 +129,6 @@ class Preprocess(BaseEstimator, TransformerMixin):
         df['new_city_high_amt'] = (
             (df['city_first_use'] == 1) & (df['amt'] > 100)
         ).astype(int)
-
-        # Add this in preprocess after pd.cut
         df['age_group'] = df['age_group'].astype(str)
 
         # Drop columns
