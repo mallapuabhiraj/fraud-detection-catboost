@@ -13,8 +13,8 @@
 |--------|-------|
 | **Test PR-AUC** | **0.9284** |
 | Test ROC-AUC | 0.9986 |
-| Fraud Recall | 0.90 |
-| Precision | 0.77 |
+| Fraud Recall | 0.89 |
+| Precision | 0.80 |
 | Val→Test Gap | 0.028 |
 
 > Evaluated on held-out `fraudTest.csv` — never seen during training or tuning.
