@@ -132,7 +132,7 @@ class Preprocess(BaseEstimator, TransformerMixin):
         df['age_group'] = df['age_group'].astype(str)
 
         # Drop columns
-        drop_cols = ['Unnamed: 0', 'first', 'last', 'street', 'trans_num', 'cc_num', 'category_amt_std',
+        drop_cols = ['merchant', 'city', 'Unnamed: 0', 'first', 'last', 'street', 'trans_num', 'cc_num', 'category_amt_std',
                      'trans_date_trans_time', 'lat', 'long', 'merch_lat', 'merch_long', 'category_amt_mean',
                      'unix_time', 'dob', 'prev_merch_lat', 'prev_merch_long', 'prev_category']
         df = df.drop(columns=[c for c in drop_cols if c in df.columns])
