@@ -176,18 +176,87 @@ unzip fraud-detection.zip
 Open `notebooks/fraud_detection.ipynb` in Colab or Jupyter.
 
 ---
+## 💻 Quick Start
+```bash
+git clone https://github.com/mallapuabhiraj/fraud-detection-catboost.git
+cd fraud-detection-catboost
+pip install -r requirements.txt
+```
 
-## Project Structure
+**Requirements:**
+```
+catboost==1.2.7
+scikit-learn==1.4.0
+numpy
+pandas
+joblib
+```
+
+**Run a prediction:**
+```python
+import joblib
+import numpy as np
+import pandas as pd
+from catboost import CatBoostClassifier, Pool
+from src.preprocess import Preprocess
+─────────────────────────────────────────────────────────────────
+
+cat_cols = ['job', 'age_group', 'category', 'state']
+
+preprocess_pipe = joblib.load('models/preprocess_pipe.joblib')
+model = CatBoostClassifier()
+model.load_model('models/cb_model.cbm')
+
+sample = pd.DataFrame([{
+    'trans_date_trans_time': '2020-06-21 12:14:25',
+    'cc_num': 2703186189652095,
+    'merchant': 'fraud_Rippin, Kub and Mann',
+    'category': 'misc_net',
+    'amt': 4.97,
+    'gender': 'F',
+    'city': 'Hazlehurst',
+    'state': 'GA',
+    'zip': 31539,
+    'lat': 31.4956,
+    'long': -82.1204,
+    'city_pop': 777,
+    'job': 'Mechanical engineer',
+    'dob': '1968-03-19',
+    'merch_lat': 30.9986,
+    'merch_long': -82.6789
+}])
+
+sample_proc = preprocess_pipe.transform(sample)
+pool = Pool(sample_proc, cat_features=cat_cols)
+
+pred = model.predict(pool)[0]
+prob = model.predict_proba(pool)[0][1]
+
+print(f"Transaction: {'🚨 Fraudulent' if pred else '✅ Legitimate'}")
+print(f"Fraud Probability: {prob:.2%}")
+```
+## 🗂️ Project Structure
 ```
 fraud-detection-catboost/
 │
 ├── README.md
 ├── requirements.txt
-├── config.json                 ← best hyperparameters
+├── config.json                         # best Optuna hyperparameters
+│
 ├── notebooks/
-│   └── fraud_detection.ipynb  ← full pipeline
-└── src/
-    └── preprocess.py          ← feature engineering
+│   └── fraud_detection.ipynb           # full pipeline — EDA → training → evaluation
+│
+├── src/
+│   └── preprocess.py                   # feature engineering + Preprocess transformer
+│
+├── models/
+│   ├── cb_model.cbm                    # ✅ final tuned CatBoost model
+│   └── preprocess_pipe.joblib          # sklearn preprocessing pipeline
+│
+└── plots/
+    ├── pr_curve.png                    # Precision-Recall curve
+    ├── cost_threshold.png              # cost-sensitive threshold tuning
+    └── feature_importance.png          # top 15 features
 ```
 
 ---
