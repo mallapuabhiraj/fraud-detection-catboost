@@ -2,12 +2,12 @@
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python)
 ![CatBoost](https://img.shields.io/badge/CatBoost-Latest-yellow?style=for-the-badge)
 
-# Credit Card Fraud Detection — 0.92 PR-AUC
+# ⚡ Credit Card Fraud Detection — 0.92 PR-AUC
 
 > Detecting financial fraud in a dataset with **0.6% fraud rate** using CatBoost with
 > advanced feature engineering and cost-sensitive optimization.
 
-## Results
+## 📊 Results
 
 | Metric | Value |
 |--------|-------|
@@ -21,7 +21,7 @@
 
 ---
 
-## The Problem
+## 🚨 The Problem
 
 Credit card fraud costs billions annually. With only **0.6% of transactions being fraudulent**,
 standard models fail — optimizing accuracy gives 99.4% by predicting nothing is fraud.
@@ -29,7 +29,7 @@ This project solves the real problem: **finding fraud without drowning analysts 
 
 ---
 
-## Key Technical Decisions
+## 🧠 Key Technical Decisions
 
 ### Why PR-AUC, not Accuracy or ROC-AUC
 At 0.6% fraud rate, ROC-AUC is misleading — a model predicting all legitimate
@@ -43,14 +43,14 @@ XGBoost with Leave-One-Out encoding achieved **0.67 test PR-AUC** with a
 - Reduced val→test gap from **0.11 → 0.028**
 - Improved test PR-AUC from **0.67 → 0.93**
 
-### Why Time-Based Split
+### 🕐 Why Time-Based Split
 Fraud data is temporal. Random splits leak future transaction patterns into
 training — inflating scores without improving real detection. Every evaluation
 in this project uses strict temporal ordering.
 
 ---
 
-## Most Impactful Features
+## ⚡ Most Impactful Features
 
 | Feature | Description | Why It Works |
 |---------|-------------|--------------|
@@ -67,7 +67,7 @@ in this project uses strict temporal ordering.
 
 ---
 
-## Methodology
+## 🔍 Methodology
 ```
 Raw Data (1M rows, 0.6% fraud)
         ↓
@@ -86,7 +86,7 @@ Final Evaluation on fraudTest.csv
 
 ---
 
-## Hyperparameter Tuning
+## 🎛️ Hyperparameter Tuning
 
 Used **Optuna with TPE sampler** to tune 7 parameters:
 ```python
@@ -113,7 +113,7 @@ best_params = {
 
 ---
 
-## Cost-Sensitive Threshold Tuning
+## 💰 Cost-Sensitive Threshold Tuning
 
 Default 0.5 threshold optimizes for accuracy — wrong for fraud detection.
 This project finds the optimal threshold by minimizing business cost:
@@ -128,8 +128,9 @@ Total Cost = (False Positives × 1) + (False Negatives × 6)
 ![PR Curve](images/pr_curve.png)
 ![Cost Threshold](images/cost_threshold.png)
 ---
+Here they are as a simple list you can copy one by one:
 
-## Dataset
+## 📁 Dataset
 
 Simulated credit card transactions from the
 [Kaggle Fraud Detection Dataset](https://www.kaggle.com/datasets/kartik2112/fraud-detection)
@@ -142,8 +143,6 @@ Simulated credit card transactions from the
 
 > Dataset is not included in this repository.
 > Download from Kaggle using the instructions below.
-
----
 ---
 ## 💻 Quick Start
 ```bash
@@ -168,7 +167,6 @@ import numpy as np
 import pandas as pd
 from catboost import CatBoostClassifier, Pool
 from src.preprocess import Preprocess
-─────────────────────────────────────────────────────────────────
 
 cat_cols = ['job', 'age_group', 'category', 'state']
 
@@ -230,7 +228,7 @@ fraud-detection-catboost/
 
 ---
 
-## Skills Demonstrated
+## 🛠️ Skills Demonstrated
 
 `CatBoost` `Optuna` `Feature Engineering` `Imbalanced Learning`
 `Time-Series Validation` `Cost-Sensitive ML` `Hyperparameter Tuning`
