@@ -144,37 +144,6 @@ Simulated credit card transactions from the
 > Download from Kaggle using the instructions below.
 
 ---
-
-## Setup
-
-### 1. Clone repository
-```bash
-git clone https://github.com/mallapuabhiraj/fraud-detection-catboost
-cd fraud-detection-catboost
-```
-
-### 2. Install dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Download dataset from Kaggle
-
-**Option A — Kaggle API:**
-```bash
-pip install kaggle
-kaggle datasets download -d kartik2112/fraud-detection
-unzip fraud-detection.zip
-```
-
-**Option B — Manual:**
-1. Go to [kaggle.com/datasets/kartik2112/fraud-detection](https://www.kaggle.com/datasets/kartik2112/fraud-detection)
-2. Click Download
-3. Place `fraudTrain.csv` and `fraudTest.csv` in project root
-
-### 4. Run notebook
-Open `notebooks/fraud_detection.ipynb` in Colab or Jupyter.
-
 ---
 ## 💻 Quick Start
 ```bash
