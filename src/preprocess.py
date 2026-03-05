@@ -24,8 +24,8 @@ class Preprocess(BaseEstimator, TransformerMixin):
         df['dob'] = pd.to_datetime(df['dob'], format='mixed', errors='coerce')
 
         # 2. Calculating age and distance features
-        df['age'] = ((df['trans_date_trans_time'] - df['dob']).dt.days // 365).clip(18, 100).astype(int)
-        df['distance_km'] = self.haversine_distance(
+        # REPLACE this line
+        df['age'] = ((df['trans_date_trans_time'] - df['dob']).dt.days // 365).fillna(30).clip(18, 100).astype(int)        df['distance_km'] = self.haversine_distance(
             df['lat'].values, df['long'].values,
             df['merch_lat'].values, df['merch_long'].values
         )
