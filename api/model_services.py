@@ -11,8 +11,7 @@ class FraudModelService:
         self.model.load_model('models/cb_model.cbm')
         print('Model loaded Successfully')
         self.preprocess_pipe = load(
-            'models/preprocess_pipe.joblib',
-            globals={'Preprocess': Preprocess}
+            'models/preprocess_pipe.joblib'
         )
         print('Pipeline loaded Successfully')
 
