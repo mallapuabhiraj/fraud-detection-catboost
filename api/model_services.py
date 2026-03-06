@@ -2,6 +2,7 @@ from catboost import CatBoostClassifier, Pool
 import pandas as pd
 from api.config import FRAUD_THRESHOLD, CAT_COLS
 from src.preprocess import Preprocess
+from sklearn.pipeline import Pipeline
 
 class FraudModelService:
     def __init__(self):
