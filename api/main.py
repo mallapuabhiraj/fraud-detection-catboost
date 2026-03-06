@@ -30,7 +30,7 @@ def predict_batch(batch: BatchRequest):
 
     for tx in batch.transactions:
 
-        data = tx.model_dump()
+        data = tx.dict()
 
         probability, prediction, risk = model_service.predict(data)
 
