@@ -3,13 +3,17 @@ import pandas as pd
 from api.config import FRAUD_THRESHOLD, CAT_COLS
 from src.preprocess import Preprocess
 from sklearn.pipeline import Pipeline
+from joblib import load
 
 class FraudModelService:
     def __init__(self):
         self.model = CatBoostClassifier()
         self.model.load_model('models/cb_model.cbm')
         print('Model loaded Successfully')
-        self.preprocess_pipe = Pipeline([('preprocess', Preprocess())])
+        self.preprocess_pipe = load(
+            'models/preprocess_pipe.joblib',
+            globals={'Preprocess': Preprocess}
+        )
         print('Pipeline loaded Successfully')
 
     def predict(self, data: dict):
