@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from api.schemas import Transaction, PredictionResponse, BatchRequest
-from api.model_service import FraudModelService
+from api.model_services import FraudModelService
 
 app = FastAPI(
     title="Fraud Detection API",
