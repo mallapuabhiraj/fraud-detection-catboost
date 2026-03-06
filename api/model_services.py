@@ -9,8 +9,28 @@ class FraudModelService:
         self.model.load_model('models/cb_model.cbm')
         self.preprocess_pipe = joblib.load('models/preprocess_pipe.joblib')
     def predict(self, data: dict):
+        # Converting the data to a Pandas DataFrame
         df = pd.DataFrame([data])
-        df_preprocessed = self.preprocess_pipe.transform(df)
-        pool = Pool(df_preprocessed, cat_features=CAT_COLS)
-        proba = self.model.predict_proba(df_preprocessed)
-        pred = proba > FRAUD_THRESHOLD
+        
+        # Performing Data Preprocessing using preprocess_pipe
+        df_proc = self.preprocess_pipe.transform(df)
+
+        # Creating pool as CatBoost require categorical features
+        pool = Pool(df_proc, cat_features=CAT_COLS)
+
+        # Taking Probability and rounding it
+        probability = self.model.predict_proba(pool)[0][1]
+        probability = float(round(probability, 3))
+
+        # Making our final prediction using FRAUD_THRESHOLD
+        prediction = "fraud" if probability >= FRAUD_THRESHOLD else "legitimate"
+
+        # Defining risk using probability
+        if probability >= 0.9:
+            risk = "High Risk"
+        elif probability >= FRAUD_THRESHOLD:
+            risk = "Medium Risk"
+        else:
+            risk = "Low Risk"
+        
+        return probability, prediction, risk
