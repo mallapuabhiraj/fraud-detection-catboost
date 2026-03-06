@@ -24,7 +24,7 @@ def predict(tnx: Transaction):
         "risk_level": risk
     }
 
-@app.post(/predict-batch', response_model = PredictionResponse)
+@app.post('/predict-batch', response_model = PredictionResponse)
 def predict_batch(batch: BatchRequest)
     results = []
 
