@@ -7,8 +7,12 @@ class FraudModelService:
     def __init__(self):
         self.model = CatBoostClassifier()
         self.model.load_model('models/cb_model.cbm')
+        print('Model loaded Successfully')
         self.preprocess_pipe = joblib.load('models/preprocess_pipe.joblib')
+        print('Pipeline loaded Successfully')
+
     def predict(self, data: dict):
+        print('Recieved Predict Request')
         # Converting the data to a Pandas DataFrame
         df = pd.DataFrame([data])
         
