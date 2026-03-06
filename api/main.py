@@ -25,7 +25,7 @@ def predict(tnx: Transaction):
     }
 
 @app.post('/predict-batch', response_model = PredictionResponse)
-def predict_batch(batch: BatchRequest)
+def predict_batch(batch: BatchRequest):
     results = []
 
     for tx in batch.transactions:
