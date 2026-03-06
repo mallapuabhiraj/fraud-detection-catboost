@@ -16,7 +16,7 @@ def health():
 
 @app.post('/predict', response_model = PredictionResponse)
 def predict(tnx: Transaction):
-    data = tnx.model_dump()
+    data = tnx.dict()
     probability, prediction, risk = model_service.predict(data)
     return {
         "fraud_probability": probability,
