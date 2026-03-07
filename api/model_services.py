@@ -26,7 +26,7 @@ class FraudModelService:
             pool = Pool(df_proc, cat_features=CAT_COLS)
             probability = float(round(self.model.predict_proba(pool)[0][1], 3))
             prediction = "fraud" if probability >= FRAUD_THRESHOLD else "legitimate"
-            risk = "High Risk" if probability >= 0.9 else "Medium Risk" if probability >= FRAUD_THRESHOLD else "Low Risk"
+            risk = "Critical Risk" if probability >= 0.99 else "High Risk" if probability >= 0.9 else "Elevated Risk" if probability >= FRAUD_THRESHOLD else "Low Risk"
             
             return probability, prediction, risk
         except Exception as e:
