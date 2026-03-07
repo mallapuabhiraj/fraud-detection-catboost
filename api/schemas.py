@@ -29,3 +29,6 @@ class PredictionResponse(BaseModel):
 
 class BatchRequest(BaseModel):
     transactions: List[Transaction]
+
+class BatchPredictionResponse(BaseModel):
+    predictions: List[PredictionResponse]
