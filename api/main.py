@@ -14,18 +14,20 @@ app = FastAPI(
 
 model_service = FraudModelService()
 
-create_tables()
+try:
+    create_tables()
+    logger.info("Database tables created successfully")
+except Exception as e:
+    logger.warning(f"Database connection failed: {e}")
 
 @app.get('/health')
 def health():
-    # Check database connection
     try:
         db = SessionLocal()
         db.execute(text("SELECT 1"))
         db.close()
         db_status = "connected"
-    except Exception as e:
-        logger.error(f"Database health check failed: {e}")
+    except Exception:
         db_status = "disconnected"
 
     return {
