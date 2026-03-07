@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api.schemas import Transaction, PredictionResponse, BatchRequest
+from api.schemas import Transaction, PredictionResponse, BatchRequest, BatchPredictionResponse
 from api.model_services import FraudModelService
 
 app = FastAPI(
@@ -16,7 +16,7 @@ def health():
 
 @app.post('/predict', response_model = PredictionResponse)
 def predict(tnx: Transaction):
-    data = tnx.dict()
+    data = tnx.model_dump()
     probability, prediction, risk = model_service.predict(data)
     return {
         "fraud_probability": probability,
@@ -24,13 +24,13 @@ def predict(tnx: Transaction):
         "risk_level": risk
     }
 
-@app.post('/predict-batch', response_model = PredictionResponse)
+@app.post('/predict-batch', response_model = BatchPredictionResponse)
 def predict_batch(batch: BatchRequest):
     results = []
 
     for tx in batch.transactions:
 
-        data = tx.model_dump(mode='json')
+        data = tx.model_dump()
 
         probability, prediction, risk = model_service.predict(data)
 
