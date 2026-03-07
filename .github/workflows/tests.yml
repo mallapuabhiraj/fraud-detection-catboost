@@ -1,0 +1,5 @@
+on: every push
+do:
+  - install python
+  - install requirements
+  - run pytest
