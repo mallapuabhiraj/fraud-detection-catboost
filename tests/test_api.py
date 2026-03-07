@@ -107,7 +107,7 @@ def test_predict_prediction_is_valid_label(mock_db, mock_model_service):
 def test_predict_risk_is_valid_label(mock_db, mock_model_service):
     response = client.post("/predict", json=SAMPLE_TRANSACTION)
     risk = response.json()["risk_level"]
-    assert risk in ["Low Risk", "Medium Risk", "High Risk"]
+    assert risk in ["Low Risk", "Elevated Risk", "High Risk", "Critical Risk"]
 
 
 # ─── Batch Tests ─────────────────────────────────────────────────────────────
